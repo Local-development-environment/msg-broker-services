@@ -1,0 +1,20 @@
+services:
+  rabbitmq:
+    image: rabbitmq:4-management
+    container_name: rabbitmq-4
+    ports:
+      - ${RABBITMQ_PORT}:5672
+      - ${RABBITMQ_MANAGER_PORT}:15672
+    environment:
+      - RABBITMQ_DEFAULT_VHOST=local
+    volumes:
+      - 'rabbitmq_data:/data'
+    networks:
+      - amqp_net
+
+volumes:
+  rabbitmq_data:
+    name: rabbitmq_data
+networks:
+  amqp_net:
+    name: amqp_net
